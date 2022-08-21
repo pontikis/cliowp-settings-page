@@ -4,4 +4,4 @@ A test WordPress plugin to demonstrate Admin Settings Page creation
 
 ## Contributors
 
-Christos POntikis (pontikis)
+Christos Pontikis (pontikis)
