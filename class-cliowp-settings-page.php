@@ -127,7 +127,7 @@ class ClioWP_Settings_Page {
 	 */
 	public function add_settings_page() {
 		/**
-		* Parmas for add_options_page
+		* Params for add_options_page
 		*
 		* @param  string       $page_title The text to be displayed in the title tags of the page when the menu is selected.
 		* @param  string       $menu_title The text to be used for the menu.
