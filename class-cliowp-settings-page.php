@@ -83,20 +83,6 @@ class ClioWP_Settings_Page {
 	private $option_group;
 
 	/**
-	 * Input1 label.
-	 *
-	 * @var string
-	 */
-	private $input1_label;
-
-	/**
-	 * Input1 name.
-	 *
-	 * @var string
-	 */
-	private $input1_name;
-
-	/**
 	 * Constructor
 	 */
 	public function __construct() {
@@ -112,9 +98,6 @@ class ClioWP_Settings_Page {
 		$this->section1_title = __( 'Section A', 'cliowp-settings-page' );
 
 		$this->option_group = 'cliowp_sp_plugin';
-
-		$this->input1_label = __( 'Input1 Label', 'cliowp-settings-page' );
-		$this->input1_name  = 'cliowp_sp_input1';
 
 		// actions.
 		add_action( 'admin_menu', array( $this, 'add_settings_page' ) );
@@ -207,7 +190,7 @@ class ClioWP_Settings_Page {
 		 */
 		add_settings_field(
 			'cliowp_sp_input1',
-			$this->input1_label,
+			__( 'Input1 Label', 'cliowp-settings-page' ),
 			array( $this, 'input1_html' ),
 			$this->menu_slug,
 			$this->section1_id
@@ -235,10 +218,27 @@ class ClioWP_Settings_Page {
 		 */
 		register_setting(
 			$this->option_group,
-			$this->input1_name,
+			'cliowp_sp_input1',
 			array(
 				'sanitize_callback' => 'sanitize_text_field',
-				'default'           => 'Test',
+				'default'           => 'input1 test',
+			)
+		);
+
+		add_settings_field(
+			'cliowp_sp_select1',
+			__( 'Select1 Label', 'cliowp-settings-page' ),
+			array( $this, 'select1_html' ),
+			$this->menu_slug,
+			$this->section1_id
+		);
+
+		register_setting(
+			$this->option_group,
+			'cliowp_sp_select1',
+			array(
+				'sanitize_callback' => array( $this, 'sanitize_select1' ),
+				'default'           => '1',
 			)
 		);
 	}
@@ -248,8 +248,39 @@ class ClioWP_Settings_Page {
 	 */
 	public function input1_html() {
 		?>
-		<input type="text" name="<?php echo esc_attr( $this->input1_name ); ?>" value="<?php echo esc_attr( get_option( $this->input1_name ) ); ?>">
+		<input type="text" name="cliowp_sp_input1" value="<?php echo esc_attr( get_option( 'cliowp_sp_input1' ) ); ?>">
 		<?php
+	}
+
+	/**
+	 * Undocumented function
+	 */
+	public function select1_html() {
+		?>
+		<select name="cliowp_sp_select1">
+			<option value="1" <?php selected( get_option( 'cliowp_sp_select1' ), '1' ); ?>><?php esc_attr_e( 'Option1', 'cliowp-settings-page' ); ?></option>
+			<option value="2" <?php selected( get_option( 'cliowp_sp_select1' ), '2' ); ?>><?php esc_attr_e( 'Option2', 'cliowp-settings-page' ); ?></option>
+			<option value="3" <?php selected( get_option( 'cliowp_sp_select1' ), '3' ); ?>><?php esc_attr_e( 'Option3', 'cliowp-settings-page' ); ?></option>
+		</select>
+		<?php
+	}
+
+	/**
+	 * Undocumented function
+	 *
+	 * @param string $input The selected value.
+	 */
+	public function sanitize_select1( $input ) {
+		$valid_input = array( '1', '2', '3' );
+		if ( false === in_array( $input, $valid_input, true ) ) {
+			add_settings_error(
+				'cliowp_sp_select1',
+				'cliowp_sp_select1_error',
+				__( 'Invalid option for Select1', 'cliowp-settings-page' ),
+			);
+			return get_option( 'cliowp_sp_select1' );
+		}
+		return $input;
 	}
 
 	/**
