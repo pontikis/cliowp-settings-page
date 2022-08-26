@@ -94,9 +94,6 @@ class ClioWP_Settings_Page {
 
 		$this->form_action = 'options.php';
 
-		$this->section1_id    = 'cliowp_settings_page_section1';
-		$this->section1_title = __( 'Section A', 'cliowp-settings-page' );
-
 		$this->option_group = 'cliowp_sp_plugin';
 
 		// actions.
@@ -152,8 +149,15 @@ class ClioWP_Settings_Page {
 		 *                           add_options_page();
 		 */
 		add_settings_section(
-			$this->section1_id,
-			$this->section1_title,
+			'cliowp_settings_page_section1',
+			__( 'Section A', 'cliowp-settings-page' ),
+			null,
+			$this->menu_slug
+		);
+
+		add_settings_section(
+			'cliowp_settings_page_section2',
+			__( 'Section B', 'cliowp-settings-page' ),
 			null,
 			$this->menu_slug
 		);
@@ -193,7 +197,7 @@ class ClioWP_Settings_Page {
 			__( 'Input1 Label', 'cliowp-settings-page' ),
 			array( $this, 'input1_html' ),
 			$this->menu_slug,
-			$this->section1_id
+			'cliowp_settings_page_section1'
 		);
 
 		/**
@@ -230,7 +234,7 @@ class ClioWP_Settings_Page {
 			__( 'Select1 Label', 'cliowp-settings-page' ),
 			array( $this, 'select1_html' ),
 			$this->menu_slug,
-			$this->section1_id
+			'cliowp_settings_page_section1'
 		);
 
 		register_setting(
@@ -238,6 +242,23 @@ class ClioWP_Settings_Page {
 			'cliowp_sp_select1',
 			array(
 				'sanitize_callback' => array( $this, 'sanitize_select1' ),
+				'default'           => '1',
+			)
+		);
+
+		add_settings_field(
+			'cliowp_sp_checkbox1',
+			__( 'Checkbox1 Label', 'cliowp-settings-page' ),
+			array( $this, 'checkbox1_html' ),
+			$this->menu_slug,
+			'cliowp_settings_page_section2'
+		);
+
+		register_setting(
+			$this->option_group,
+			'cliowp_sp_checkbox1',
+			array(
+				'sanitize_callback' => 'sanitize_text_field',
 				'default'           => '1',
 			)
 		);
@@ -281,6 +302,15 @@ class ClioWP_Settings_Page {
 			return get_option( 'cliowp_sp_select1' );
 		}
 		return $input;
+	}
+
+	/**
+	 * Undocumented function
+	 */
+	public function checkbox1_html() {
+		?>
+		<input type="checkbox" name="cliowp_sp_checkbox1" value="1" <?php checked( get_option( 'cliowp_sp_checkbox1' ), '1' ); ?>>
+		<?php
 	}
 
 	/**
