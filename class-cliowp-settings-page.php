@@ -224,7 +224,7 @@ class ClioWP_Settings_Page {
 			$this->option_group,
 			'cliowp_sp_input1',
 			array(
-				'sanitize_callback' => 'sanitize_text_field',
+				'sanitize_callback' => array( $this, 'sanitize_input1' ),
 				'default'           => 'input1 test',
 			)
 		);
@@ -291,6 +291,24 @@ class ClioWP_Settings_Page {
 		?>
 		<input type="text" name="cliowp_sp_input1" value="<?php echo esc_attr( get_option( 'cliowp_sp_input1' ) ); ?>">
 		<?php
+	}
+
+	/**
+	 * Undocumented function
+	 *
+	 * @param string $input The input value.
+	 */
+	public function sanitize_input1( $input ) {
+		if ( true === empty( $input ) ) {
+			add_settings_error(
+				'cliowp_sp_input1',
+				'cliowp_sp_input1_error',
+				__( 'Input1 cannot be empty', 'cliowp-settings-page' ),
+			);
+			return get_option( 'cliowp_sp_input1' );
+		}
+
+		return sanitize_text_field( $input );
 	}
 
 	/**
