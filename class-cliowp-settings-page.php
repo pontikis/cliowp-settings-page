@@ -247,6 +247,26 @@ class ClioWP_Settings_Page {
 		);
 
 		add_settings_field(
+			'cliowp_sp_textarea1',
+			__( 'Textarea1 Label', 'cliowp-settings-page' ),
+			array( $this, 'textarea1_html' ),
+			$this->menu_slug,
+			'cliowp_settings_page_section2',
+			array(
+				'rows' => 4,
+				'cols' => 30,
+			)
+		);
+
+		register_setting(
+			$this->option_group,
+			'cliowp_sp_textarea1',
+			array(
+				'sanitize_callback' => 'sanitize_textarea_field',
+			)
+		);
+
+		add_settings_field(
 			'cliowp_sp_checkbox1',
 			__( 'Checkbox1 Label', 'cliowp-settings-page' ),
 			array( $this, 'checkbox1_html' ),
@@ -302,6 +322,20 @@ class ClioWP_Settings_Page {
 			return get_option( 'cliowp_sp_select1' );
 		}
 		return $input;
+	}
+
+	/**
+	 * Undocumented function
+	 *
+	 * @param array $args Arguments passed.
+	 */
+	public function textarea1_html( array $args ) {
+		?>
+		<textarea
+			name="cliowp_sp_textarea1"
+			rows="<?php echo esc_html( $args['rows'] ); ?>"
+			cols="<?php echo esc_html( $args['cols'] ); ?>"><?php echo esc_attr( get_option( 'cliowp_sp_textarea1' ) ); ?></textarea>
+		<?php
 	}
 
 	/**
