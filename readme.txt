@@ -1,6 +1,6 @@
 # ClioWP Settings Page
 
-A test WordPress plugin to demonstrate Admin Settings Page creation
+Free WordPress plugin to generate Admin Settings Page.
 
 ## Contributors
 

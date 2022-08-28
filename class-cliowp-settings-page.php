@@ -2,7 +2,7 @@
 /**
  * Plugin Name: ClioWP Settings Page
  * Plugin URI: https://github.com/pontikis/cliowp-settings-page
- * Description: A WordPress plugin to generate Admin Settings Page
+ * Description: Free WordPress plugin to generate Admin Settings Page
  * Version: 1.0.0
  * Author: Christos Pontikis
  * Author URI: https://pontikis.net
