@@ -271,6 +271,20 @@ class ClioWP_Settings_Page {
 			)
 		);
 
+		// Number field -------------------------------------------------------.
+		add_settings_field(
+			'cliowp_sp_number1',
+			__( 'Number1 Label', 'cliowp-settings-page' ),
+			array( $this, 'number1_html' ),
+			$this->menu_slug,
+			'cliowp_settings_page_section1'
+		);
+
+		register_setting(
+			$this->option_group,
+			'cliowp_sp_number1',
+		);
+
 		// Select field -------------------------------------------------------.
 		add_settings_field(
 			'cliowp_sp_select1',
@@ -285,6 +299,24 @@ class ClioWP_Settings_Page {
 			'cliowp_sp_select1',
 			array(
 				'sanitize_callback' => array( $this, 'sanitize_select1' ),
+				'default'           => '1',
+			)
+		);
+
+		// Checkbox field -----------------------------------------------------.
+		add_settings_field(
+			'cliowp_sp_checkbox1',
+			__( 'Checkbox1 Label', 'cliowp-settings-page' ),
+			array( $this, 'checkbox1_html' ),
+			$this->menu_slug,
+			'cliowp_settings_page_section1'
+		);
+
+		register_setting(
+			$this->option_group,
+			'cliowp_sp_checkbox1',
+			array(
+				'sanitize_callback' => 'sanitize_text_field',
 				'default'           => '1',
 			)
 		);
@@ -322,24 +354,6 @@ class ClioWP_Settings_Page {
 		register_setting(
 			$this->option_group,
 			'cliowp_sp_color1',
-		);
-
-		// Checkbox field -----------------------------------------------------.
-		add_settings_field(
-			'cliowp_sp_checkbox1',
-			__( 'Checkbox1 Label', 'cliowp-settings-page' ),
-			array( $this, 'checkbox1_html' ),
-			$this->menu_slug,
-			'cliowp_settings_page_section2'
-		);
-
-		register_setting(
-			$this->option_group,
-			'cliowp_sp_checkbox1',
-			array(
-				'sanitize_callback' => 'sanitize_text_field',
-				'default'           => '1',
-			)
 		);
 
 	}
@@ -413,6 +427,15 @@ class ClioWP_Settings_Page {
 	}
 
 	/**
+	 * Create HTML for number1 field
+	 */
+	public function number1_html() {
+		?>
+		<input type="number" name="cliowp_sp_number1" value="<?php echo esc_attr( get_option( 'cliowp_sp_number1' ) ); ?>">
+		<?php
+	}
+
+	/**
 	 * Create HTML for select1 field
 	 */
 	public function select1_html() {
@@ -444,6 +467,15 @@ class ClioWP_Settings_Page {
 	}
 
 	/**
+	 * Create HTML for checkbox1 field
+	 */
+	public function checkbox1_html() {
+		?>
+		<input type="checkbox" name="cliowp_sp_checkbox1" value="1" <?php checked( get_option( 'cliowp_sp_checkbox1' ), '1' ); ?>>
+		<?php
+	}
+
+	/**
 	 * Create HTML for textarea1 field
 	 *
 	 * @param array $args Arguments passed.
@@ -463,15 +495,6 @@ class ClioWP_Settings_Page {
 	public function color1_html() {
 		?>
 		<input type="color" name="cliowp_sp_color1" value="<?php echo esc_attr( get_option( 'cliowp_sp_color1' ) ); ?>">
-		<?php
-	}
-
-	/**
-	 * Create HTML for checkbox1 field
-	 */
-	public function checkbox1_html() {
-		?>
-		<input type="checkbox" name="cliowp_sp_checkbox1" value="1" <?php checked( get_option( 'cliowp_sp_checkbox1' ), '1' ); ?>>
 		<?php
 	}
 
