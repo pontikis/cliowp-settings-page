@@ -2,12 +2,15 @@
 /**
  * Plugin Name: ClioWP Settings Page
  * Plugin URI: https://github.com/pontikis/cliowp-settings-page
- * Description: A test WordPress plugin to demonstrate Admin Settings Page creation
+ * Description: A WordPress plugin to generate Admin Settings Page
  * Version: 1.0.0
  * Author: Christos Pontikis
  * Author URI: https://pontikis.net
  * Text Domain: cliowp-settings-page
  * Domain Path: /languages
+ * Requires PHP: 5.6.20
+ * Tested up to: 6.0.1
+ * License: GPLv2 or later
  *
  * @package ClioWP_Settings_Page
  */
@@ -21,8 +24,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * ClioWP Settings Page plugin main class
  *
  * Before use this code in your own plugin:
- * - Change text domain (cliowp-settings-page) to your own text domain
- * - Make the appropriate changes in parameters in constructor
+ * - Change the text domain (cliowp-settings-page) to your own text domain
+ * - Make the appropriate changes in parameters in the constructor
  */
 class ClioWP_Settings_Page {
 
