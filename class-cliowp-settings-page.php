@@ -413,7 +413,7 @@ class ClioWP_Settings_Page {
 	}
 
 	/**
-	 * Create Settings Pahe HTML
+	 * Create Settings Page HTML
 	 */
 	public function settings_page_html() {
 		?>
