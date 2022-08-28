@@ -310,6 +310,20 @@ class ClioWP_Settings_Page {
 			)
 		);
 
+		// Color field --------------------------------------------------------.
+		add_settings_field(
+			'cliowp_sp_color1',
+			__( 'Color1 Label', 'cliowp-settings-page' ),
+			array( $this, 'color1_html' ),
+			$this->menu_slug,
+			'cliowp_settings_page_section2'
+		);
+
+		register_setting(
+			$this->option_group,
+			'cliowp_sp_color1',
+		);
+
 		// Checkbox field -----------------------------------------------------.
 		add_settings_field(
 			'cliowp_sp_checkbox1',
@@ -440,6 +454,15 @@ class ClioWP_Settings_Page {
 			name="cliowp_sp_textarea1"
 			rows="<?php echo esc_html( $args['rows'] ); ?>"
 			cols="<?php echo esc_html( $args['cols'] ); ?>"><?php echo esc_attr( get_option( 'cliowp_sp_textarea1' ) ); ?></textarea>
+		<?php
+	}
+
+	/**
+	 * Create HTML for color1 field
+	 */
+	public function color1_html() {
+		?>
+		<input type="color" name="cliowp_sp_color1" value="<?php echo esc_attr( get_option( 'cliowp_sp_color1' ) ); ?>">
 		<?php
 	}
 
