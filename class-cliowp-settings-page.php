@@ -62,20 +62,6 @@ class ClioWP_Settings_Page {
 	private $form_action;
 
 	/**
-	 * Section A id.
-	 *
-	 * @var string
-	 */
-	private $section1_id;
-
-	/**
-	 * Section A title.
-	 *
-	 * @var string
-	 */
-	private $section1_title;
-
-	/**
 	 * Option group.
 	 *
 	 * @var string
@@ -127,9 +113,12 @@ class ClioWP_Settings_Page {
 	}
 
 	/**
-	 * Undocumented function
+	 * Compose settings
 	 */
 	public function add_settings() {
+
+		// Define Sections ----------------------------------------------------.
+
 		/**
 		 * Adds a new section to a settings page.
 		 *
@@ -161,6 +150,8 @@ class ClioWP_Settings_Page {
 			null,
 			$this->menu_slug
 		);
+
+		// Input text field ---------------------------------------------------.
 
 		/**
 		 * Adds a new field to a section of a settings page.
@@ -229,6 +220,41 @@ class ClioWP_Settings_Page {
 			)
 		);
 
+		// Date field ---------------------------------------------------------.
+		add_settings_field(
+			'cliowp_sp_date1',
+			__( 'Date1 Label', 'cliowp-settings-page' ),
+			array( $this, 'date1_html' ),
+			$this->menu_slug,
+			'cliowp_settings_page_section1'
+		);
+
+		register_setting(
+			$this->option_group,
+			'cliowp_sp_date1',
+			array(
+				'sanitize_callback' => 'sanitize_text_field',
+			)
+		);
+
+		// DateTime field -----------------------------------------------------.
+		add_settings_field(
+			'cliowp_sp_datetime1',
+			__( 'Datetime1 Label', 'cliowp-settings-page' ),
+			array( $this, 'datetime1_html' ),
+			$this->menu_slug,
+			'cliowp_settings_page_section1'
+		);
+
+		register_setting(
+			$this->option_group,
+			'cliowp_sp_datetime1',
+			array(
+				'sanitize_callback' => 'sanitize_text_field',
+			)
+		);
+
+		// Select field -------------------------------------------------------.
 		add_settings_field(
 			'cliowp_sp_select1',
 			__( 'Select1 Label', 'cliowp-settings-page' ),
@@ -246,6 +272,7 @@ class ClioWP_Settings_Page {
 			)
 		);
 
+		// Textarea field -----------------------------------------------------.
 		add_settings_field(
 			'cliowp_sp_textarea1',
 			__( 'Textarea1 Label', 'cliowp-settings-page' ),
@@ -266,6 +293,7 @@ class ClioWP_Settings_Page {
 			)
 		);
 
+		// Checkbox field -----------------------------------------------------.
 		add_settings_field(
 			'cliowp_sp_checkbox1',
 			__( 'Checkbox1 Label', 'cliowp-settings-page' ),
@@ -282,10 +310,11 @@ class ClioWP_Settings_Page {
 				'default'           => '1',
 			)
 		);
+
 	}
 
 	/**
-	 * Undocumented function
+	 * Create HTML for input1 field
 	 */
 	public function input1_html() {
 		?>
@@ -294,7 +323,7 @@ class ClioWP_Settings_Page {
 	}
 
 	/**
-	 * Undocumented function
+	 * Sanitize input1
 	 *
 	 * @param string $input The input value.
 	 */
@@ -312,7 +341,25 @@ class ClioWP_Settings_Page {
 	}
 
 	/**
-	 * Undocumented function
+	 * Create HTML for date1 field
+	 */
+	public function date1_html() {
+		?>
+		<input type="date" name="cliowp_sp_date1" value="<?php echo esc_attr( get_option( 'cliowp_sp_date1' ) ); ?>">
+		<?php
+	}
+
+	/**
+	 * Create HTML for datetime1 field
+	 */
+	public function datetime1_html() {
+		?>
+		<input type="datetime-local" name="cliowp_sp_datetime1" value="<?php echo esc_attr( get_option( 'cliowp_sp_datetime1' ) ); ?>">
+		<?php
+	}
+
+	/**
+	 * Create HTML for select1 field
 	 */
 	public function select1_html() {
 		?>
@@ -325,7 +372,7 @@ class ClioWP_Settings_Page {
 	}
 
 	/**
-	 * Undocumented function
+	 * Sanitize select1
 	 *
 	 * @param string $input The selected value.
 	 */
@@ -343,7 +390,7 @@ class ClioWP_Settings_Page {
 	}
 
 	/**
-	 * Undocumented function
+	 * Create HTML for textarea1 field
 	 *
 	 * @param array $args Arguments passed.
 	 */
@@ -357,7 +404,7 @@ class ClioWP_Settings_Page {
 	}
 
 	/**
-	 * Undocumented function
+	 * Create HTML for checkbox1 field
 	 */
 	public function checkbox1_html() {
 		?>
@@ -366,7 +413,7 @@ class ClioWP_Settings_Page {
 	}
 
 	/**
-	 * Undocumented function
+	 * Create Settings Pahe HTML
 	 */
 	public function settings_page_html() {
 		?>
@@ -387,7 +434,7 @@ class ClioWP_Settings_Page {
 	}
 
 	/**
-	 * Loads a plugin's translated strings.
+	 * Loads plugin's translated strings.
 	 */
 	public function load_languages() {
 		/**
