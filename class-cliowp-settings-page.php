@@ -326,6 +326,20 @@ class ClioWP_Settings_Page {
 			)
 		);
 
+		// MultiSelect field --------------------------------------------------.
+		add_settings_field(
+			'cliowp_sp_multiselect1',
+			__( 'MultiSelect1 Label', 'cliowp-settings-page' ),
+			array( $this, 'multiselect1_html' ),
+			$this->menu_slug,
+			'cliowp_settings_page_section2'
+		);
+
+		register_setting(
+			$this->option_group,
+			'cliowp_sp_multiselect1',
+		);
+
 		// Textarea field -----------------------------------------------------.
 		add_settings_field(
 			'cliowp_sp_textarea1',
@@ -359,6 +373,23 @@ class ClioWP_Settings_Page {
 		register_setting(
 			$this->option_group,
 			'cliowp_sp_color1',
+		);
+
+		// WYSIWYG editor field -----------------------------------------------.
+		add_settings_field(
+			'cliowp_sp_editor1',
+			__( 'Editor1 Label', 'cliowp-settings-page' ),
+			array( $this, 'editor1_html' ),
+			$this->menu_slug,
+			'cliowp_settings_page_section2',
+		);
+
+		register_setting(
+			$this->option_group,
+			'cliowp_sp_editor1',
+			array(
+				'sanitize_callback' => 'wp_kses_post',
+			)
 		);
 
 	}
@@ -487,6 +518,41 @@ class ClioWP_Settings_Page {
 	}
 
 	/**
+	 * Create HTML for multiselect1 field
+	 */
+	public function multiselect1_html() {
+		$selected_values = get_option( 'cliowp_sp_multiselect1' );
+		?>
+		<select name="cliowp_sp_multiselect1[]" multiple>
+			<option value="1" <?php echo esc_html( $this->cliowp_multiselected( $selected_values, '1' ) ); ?>><?php esc_attr_e( 'MultiSelect Option1', 'cliowp-settings-page' ); ?></option>
+			<option value="2" <?php echo esc_html( $this->cliowp_multiselected( $selected_values, '2' ) ); ?>><?php esc_attr_e( 'MultiSelect Option2', 'cliowp-settings-page' ); ?></option>
+			<option value="3" <?php echo esc_html( $this->cliowp_multiselected( $selected_values, '3' ) ); ?>><?php esc_attr_e( 'MultiSelect Option3', 'cliowp-settings-page' ); ?></option>
+			<option value="4" <?php echo esc_html( $this->cliowp_multiselected( $selected_values, '4' ) ); ?>><?php esc_attr_e( 'MultiSelect Option4', 'cliowp-settings-page' ); ?></option>
+			<option value="5" <?php echo esc_html( $this->cliowp_multiselected( $selected_values, '5' ) ); ?>><?php esc_attr_e( 'MultiSelect Option5', 'cliowp-settings-page' ); ?></option>
+		</select>
+		<?php
+	}
+
+	/**
+	 * Utility function to check if value is selected
+	 *
+	 * @param array|string $selected_values Array (or empty string) returned by get_option().
+	 * @param string       $current_value Value to check if it is selected.
+	 *
+	 * @return string
+	 */
+	private function cliowp_multiselected(
+		$selected_values,
+		string $current_value
+	): string {
+		if ( is_array( $selected_values ) && in_array( $current_value, $selected_values, true ) ) {
+			return 'selected';
+		}
+
+		return '';
+	}
+
+	/**
 	 * Create HTML for textarea1 field
 	 *
 	 * @param array $args Arguments passed.
@@ -507,6 +573,16 @@ class ClioWP_Settings_Page {
 		?>
 		<input type="color" name="cliowp_sp_color1" value="<?php echo esc_attr( get_option( 'cliowp_sp_color1' ) ); ?>">
 		<?php
+	}
+
+	/**
+	 * Create HTML for editor1 field
+	 */
+	public function editor1_html() {
+		wp_editor(
+			wp_kses_post( get_option( 'cliowp_sp_editor1' ) ),
+			'cliowp_sp_editor1',
+		);
 	}
 
 	/**
