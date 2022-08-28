@@ -254,6 +254,23 @@ class ClioWP_Settings_Page {
 			)
 		);
 
+		// Password field -----------------------------------------------------.
+		add_settings_field(
+			'cliowp_sp_password1',
+			__( 'Password1 Label', 'cliowp-settings-page' ),
+			array( $this, 'password1_html' ),
+			$this->menu_slug,
+			'cliowp_settings_page_section1'
+		);
+
+		register_setting(
+			$this->option_group,
+			'cliowp_sp_password1',
+			array(
+				'sanitize_callback' => array( $this, 'encrypt_password1' ),
+			)
+		);
+
 		// Select field -------------------------------------------------------.
 		add_settings_field(
 			'cliowp_sp_select1',
@@ -328,7 +345,7 @@ class ClioWP_Settings_Page {
 	 * @param string $input The input value.
 	 */
 	public function sanitize_input1( $input ) {
-		if ( true === empty( $input ) ) {
+		if ( true === empty( trim( $input ) ) ) {
 			add_settings_error(
 				'cliowp_sp_input1',
 				'cliowp_sp_input1_error',
@@ -356,6 +373,29 @@ class ClioWP_Settings_Page {
 		?>
 		<input type="datetime-local" name="cliowp_sp_datetime1" value="<?php echo esc_attr( get_option( 'cliowp_sp_datetime1' ) ); ?>">
 		<?php
+	}
+
+	/**
+	 * Create HTML for password1 field
+	 *
+	 * This is the only field that does not retrieve the value from the database
+	 * (because a hash is stored and not that original value).
+	 * Check the wp_options table to view what is saved as a hash.
+	 */
+	public function password1_html() {
+		?>
+		<input type="password" name="cliowp_sp_password1" value="">
+		<?php
+	}
+
+	/**
+	 * Encrypt password1
+	 *
+	 * @param string $input The plain password.
+	 */
+	public function encrypt_password1( $input ) {
+
+		return wp_hash_password( $input );
 	}
 
 	/**
