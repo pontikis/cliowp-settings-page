@@ -277,7 +277,12 @@ class ClioWP_Settings_Page {
 			__( 'Number1 Label', 'cliowp-settings-page' ),
 			array( $this, 'number1_html' ),
 			$this->menu_slug,
-			'cliowp_settings_page_section1'
+			'cliowp_settings_page_section1',
+			array(
+				'min'  => 1,
+				'max'  => 10,
+				'step' => 1,
+			)
 		);
 
 		register_setting(
@@ -428,10 +433,16 @@ class ClioWP_Settings_Page {
 
 	/**
 	 * Create HTML for number1 field
+	 *
+	 * @param array $args Arguments passed.
 	 */
-	public function number1_html() {
+	public function number1_html( array $args ) {
 		?>
-		<input type="number" name="cliowp_sp_number1" value="<?php echo esc_attr( get_option( 'cliowp_sp_number1' ) ); ?>">
+		<input type="number" name="cliowp_sp_number1"
+		min="<?php echo esc_html( $args['min'] ); ?>"
+		max="<?php echo esc_html( $args['max'] ); ?>"
+		step="<?php echo esc_html( $args['step'] ); ?>"
+		value="<?php echo esc_attr( get_option( 'cliowp_sp_number1' ) ); ?>">
 		<?php
 	}
 
