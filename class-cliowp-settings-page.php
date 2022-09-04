@@ -9,7 +9,7 @@
  * Text Domain: cliowp-settings-page
  * Domain Path: /languages
  * Requires PHP: 5.6.20
- * Tested up to: 6.0.1
+ * Tested up to: 6.0.2
  * License: GPLv2 or later
  *
  * @package ClioWP_Settings_Page
@@ -400,8 +400,7 @@ class ClioWP_Settings_Page {
 	/**
 	 * Create HTML for input1 field
 	 */
-	public function input1_html() {
-		?>
+	public function input1_html() {         ?>
 		<input type="text" name="cliowp_sp_input1" value="<?php echo esc_attr( get_option( 'cliowp_sp_input1' ) ); ?>">
 		<?php
 	}
