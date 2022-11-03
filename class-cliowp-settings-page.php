@@ -9,7 +9,7 @@
  * Text Domain: cliowp-settings-page
  * Domain Path: /languages
  * Requires PHP: 5.6.20
- * Tested up to: 6.0.2
+ * Tested up to: 6.1
  * License: GPLv2 or later
  *
  * @package ClioWP_Settings_Page
@@ -76,8 +76,8 @@ class ClioWP_Settings_Page {
 	 */
 	public function __construct() {
 		// parameters.
-		$this->page_title = __( 'Test Settings Page', 'cliowp-settings-page' );
-		$this->menu_title = __( 'Test Settings', 'cliowp-settings-page' );
+		$this->page_title = esc_html__( 'Test Settings Page', 'cliowp-settings-page' );
+		$this->menu_title = esc_html__( 'Test Settings', 'cliowp-settings-page' );
 		$this->capability = 'manage_options';
 		$this->menu_slug  = 'cliowp-settings-page-slug';
 
@@ -142,14 +142,14 @@ class ClioWP_Settings_Page {
 		 */
 		add_settings_section(
 			'cliowp_settings_page_section1',
-			__( 'Section A', 'cliowp-settings-page' ),
+			esc_html__( 'Section A', 'cliowp-settings-page' ),
 			null,
 			$this->menu_slug
 		);
 
 		add_settings_section(
 			'cliowp_settings_page_section2',
-			__( 'Section B', 'cliowp-settings-page' ),
+			esc_html__( 'Section B', 'cliowp-settings-page' ),
 			null,
 			$this->menu_slug
 		);
@@ -188,7 +188,7 @@ class ClioWP_Settings_Page {
 		 */
 		add_settings_field(
 			'cliowp_sp_input1',
-			__( 'Input1 Label', 'cliowp-settings-page' ),
+			esc_html__( 'Input1 Label', 'cliowp-settings-page' ),
 			array( $this, 'input1_html' ),
 			$this->menu_slug,
 			'cliowp_settings_page_section1'
@@ -226,7 +226,7 @@ class ClioWP_Settings_Page {
 		// Date field ---------------------------------------------------------.
 		add_settings_field(
 			'cliowp_sp_date1',
-			__( 'Date1 Label', 'cliowp-settings-page' ),
+			esc_html__( 'Date1 Label', 'cliowp-settings-page' ),
 			array( $this, 'date1_html' ),
 			$this->menu_slug,
 			'cliowp_settings_page_section1'
@@ -243,7 +243,7 @@ class ClioWP_Settings_Page {
 		// DateTime field -----------------------------------------------------.
 		add_settings_field(
 			'cliowp_sp_datetime1',
-			__( 'Datetime1 Label', 'cliowp-settings-page' ),
+			esc_html__( 'Datetime1 Label', 'cliowp-settings-page' ),
 			array( $this, 'datetime1_html' ),
 			$this->menu_slug,
 			'cliowp_settings_page_section1'
@@ -260,7 +260,7 @@ class ClioWP_Settings_Page {
 		// Password field -----------------------------------------------------.
 		add_settings_field(
 			'cliowp_sp_password1',
-			__( 'Password1 Label', 'cliowp-settings-page' ),
+			esc_html__( 'Password1 Label', 'cliowp-settings-page' ),
 			array( $this, 'password1_html' ),
 			$this->menu_slug,
 			'cliowp_settings_page_section1'
@@ -277,7 +277,7 @@ class ClioWP_Settings_Page {
 		// Number field -------------------------------------------------------.
 		add_settings_field(
 			'cliowp_sp_number1',
-			__( 'Number1 Label', 'cliowp-settings-page' ),
+			esc_html__( 'Number1 Label', 'cliowp-settings-page' ),
 			array( $this, 'number1_html' ),
 			$this->menu_slug,
 			'cliowp_settings_page_section1',
@@ -296,7 +296,7 @@ class ClioWP_Settings_Page {
 		// Select field -------------------------------------------------------.
 		add_settings_field(
 			'cliowp_sp_select1',
-			__( 'Select1 Label', 'cliowp-settings-page' ),
+			esc_html__( 'Select1 Label', 'cliowp-settings-page' ),
 			array( $this, 'select1_html' ),
 			$this->menu_slug,
 			'cliowp_settings_page_section1'
@@ -314,7 +314,7 @@ class ClioWP_Settings_Page {
 		// Checkbox field -----------------------------------------------------.
 		add_settings_field(
 			'cliowp_sp_checkbox1',
-			__( 'Checkbox1 Label', 'cliowp-settings-page' ),
+			esc_html__( 'Checkbox1 Label', 'cliowp-settings-page' ),
 			array( $this, 'checkbox1_html' ),
 			$this->menu_slug,
 			'cliowp_settings_page_section1'
@@ -332,7 +332,7 @@ class ClioWP_Settings_Page {
 		// MultiSelect field --------------------------------------------------.
 		add_settings_field(
 			'cliowp_sp_multiselect1',
-			__( 'MultiSelect1 Label', 'cliowp-settings-page' ),
+			esc_html__( 'MultiSelect1 Label', 'cliowp-settings-page' ),
 			array( $this, 'multiselect1_html' ),
 			$this->menu_slug,
 			'cliowp_settings_page_section2'
@@ -346,7 +346,7 @@ class ClioWP_Settings_Page {
 		// Textarea field -----------------------------------------------------.
 		add_settings_field(
 			'cliowp_sp_textarea1',
-			__( 'Textarea1 Label', 'cliowp-settings-page' ),
+			esc_html__( 'Textarea1 Label', 'cliowp-settings-page' ),
 			array( $this, 'textarea1_html' ),
 			$this->menu_slug,
 			'cliowp_settings_page_section2',
@@ -367,7 +367,7 @@ class ClioWP_Settings_Page {
 		// Color field --------------------------------------------------------.
 		add_settings_field(
 			'cliowp_sp_color1',
-			__( 'Color1 Label', 'cliowp-settings-page' ),
+			esc_html__( 'Color1 Label', 'cliowp-settings-page' ),
 			array( $this, 'color1_html' ),
 			$this->menu_slug,
 			'cliowp_settings_page_section2'
@@ -381,7 +381,7 @@ class ClioWP_Settings_Page {
 		// WYSIWYG editor field -----------------------------------------------.
 		add_settings_field(
 			'cliowp_sp_editor1',
-			__( 'Editor1 Label', 'cliowp-settings-page' ),
+			esc_html__( 'Editor1 Label', 'cliowp-settings-page' ),
 			array( $this, 'editor1_html' ),
 			$this->menu_slug,
 			'cliowp_settings_page_section2',
@@ -415,7 +415,7 @@ class ClioWP_Settings_Page {
 			add_settings_error(
 				'cliowp_sp_input1',
 				'cliowp_sp_input1_error',
-				__( 'Input1 cannot be empty', 'cliowp-settings-page' ),
+				esc_html__( 'Input1 cannot be empty', 'cliowp-settings-page' ),
 			);
 			return get_option( 'cliowp_sp_input1' );
 		}
@@ -503,7 +503,7 @@ class ClioWP_Settings_Page {
 			add_settings_error(
 				'cliowp_sp_select1',
 				'cliowp_sp_select1_error',
-				__( 'Invalid option for Select1', 'cliowp-settings-page' ),
+				esc_html__( 'Invalid option for Select1', 'cliowp-settings-page' ),
 			);
 			return get_option( 'cliowp_sp_select1' );
 		}
